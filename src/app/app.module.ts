@@ -24,8 +24,8 @@ import { NavBarComponent } from './../shared/components/navBar/navBar';
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {path:'', component: HomePage},
-      {path:'favorites', component: FavorisPage}
+      {path: '', component: HomePage},
+      {path: 'favorites', component: FavorisPage}
     ])
   ],
   providers: [MovieService],

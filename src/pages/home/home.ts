@@ -5,12 +5,11 @@ import {
 import {
   MovieService
 } from '../../service/movieService';
-import {
-  Movie
-} from '../../model/movie';
+
 import {
   Router
 } from '@angular/router'
+import { Movie } from 'interface/movie';
 
 
 @Component({
@@ -20,37 +19,42 @@ import {
 })
 
 export class HomePage implements OnInit {
-  movies;
-  newTodo;
-  films = [];
-  newFilm;
+  newFilm: string;
+  ListFilms: Movie[] = [];
   flagTodo: Boolean = false;
 
   constructor(public movieService: MovieService, private router: Router) { }
 
   ngOnInit() {
-    this.films = this.movieService.moviesTab;
+    this.ListFilms = this.movieService.moviesTab;
   }
 
-  addTodo(event) {
-    this.movieService.moviesTab.push(this.newTodo)
-    this.films = this.movieService.moviesTab;
+  addMovie() {
+    this.movieService.moviesTab.push({title: this.newFilm, favorite: false});
+    this.ListFilms = this.movieService.moviesTab;
   }
 
 
   deleteTodo(index) {
-    this.films.splice(index, 1);
+    this.ListFilms.splice(index, 1);
   }
 
-  favorites(isSelected:boolean, name:string, i:number) {
-    if(isSelected) {
-      this.movieService.moviesFavorites = this.films.filter(e => e === name);
-      console.log('ajout', this.movieService.moviesFavorites)
+  favorites(film: Movie, i: number): void {
+    const checked: boolean = (film.favorite = !film.favorite);
+    if (checked) {
+      const filmFavorite = this.ListFilms.filter(currentFilm => currentFilm.favorite && (currentFilm.title === film.title))[0];
 
-    }
-    else {
-      this.movieService.moviesFavorites.splice(i, 1);
-      console.log('remove',this.movieService.moviesFavorites)
+      this.movieService.moviesFavorites.push(filmFavorite);
+      console.log(this.movieService.moviesFavorites);
+
+    }else {
+      for (const currentFilm of this.movieService.moviesFavorites) {
+         if(currentFilm.title === film.title) {
+          const y = this.movieService.moviesFavorites;
+          const i:number = this.movieService.moviesFavorites.indexOf(currentFilm);
+          y.splice(i,1);
+         }
+      }
     }
   }
 
@@ -61,3 +65,5 @@ export class HomePage implements OnInit {
 
 
 }
+
+// Variable, Lecture Ecriture, Boucle, Testabilité

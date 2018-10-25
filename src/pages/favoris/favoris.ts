@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from 'service/movieService';
+import { Movie } from 'interface/movie';
 
 @Component({
     selector: 'favorisPage',
@@ -8,14 +9,12 @@ import { MovieService } from 'service/movieService';
 })
 
 export class FavorisPage implements OnInit {
-  favoritesFilms = [];
+  films: Movie[] = [];
 
   constructor(public movieService: MovieService) { }
 
   ngOnInit() {
-    this.favoritesFilms = this.movieService.moviesFavorites;
-    console.log(this.movieService.moviesFavorites)
-
+    this.films = this.movieService.moviesFavorites;
   }
 
 

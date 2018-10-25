@@ -1,11 +1,11 @@
 <h1>Bienvenue sur la page d'accueil</h1>
 <div class="jumbotron">
-  <form (submit)="addTodo($event)">
+  <form (submit)="addMovie()">
     <div class="form-row">
       <div class="form-group col-md-6">
 
         <label for="inputMovie">Ajouter un film</label>
-        <input #input [(ngModel)]="newTodo" name="newTodo"  type="text" id="choix_bieres">
+        <input #input [(ngModel)]="newFilm" name="newFilm"  type="text" id="choix_bieres">
 
         <!-- <datalist id="movies">
           <option value=""></option>
@@ -18,12 +18,12 @@
  </form>
 
 <div>
-<ul class="film" *ngFor="let film of films; let i=index">
+<ul class="film" *ngFor="let film of ListFilms; let i=index">
   <li>
-    <p>{{ film }}</p>
-    <input id="cmn-toggle-4 {{i}}" (change)="favorites($event.target.checked, film, i)" class="cmn-toggle cmn-toggle-round-flat" type="checkbox">
+    <p>{{ film.title }}</p>
+    <input id="cmn-toggle-4 {{i}}" (change)="favorites(film, i)" [checked]="film.favorite" class="cmn-toggle cmn-toggle-round-flat" type="checkbox">
     <label for="cmn-toggle-4 {{i}}"></label>
-    <button (click)="deleteTodo(i)">del</button></li>
+    <button (click)="deleteTodo(i)">supprimer</button></li>
 </ul>
 </div>
 

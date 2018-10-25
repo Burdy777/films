@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { Movie } from '../model/movie';
+import { Movie } from 'interface/movie';
 
 @Injectable()
 export class MovieService {
-  public moviesTab  = [];
-  public moviesFavorites = [];
+  public moviesTab: Movie[] = [];
+  public moviesFavorites: Movie[] = [];
 
 
-    constructor(private http: Http){}
-
+    constructor(private http: Http) { }
 
     // getAllMovies():Observable<Movie[]>{
     //     console.log(this.http.get("http://www.omdbapi.com/?i=tt3896198&apikey=6d0701e2").map((res:Response)=>res.json()) )
